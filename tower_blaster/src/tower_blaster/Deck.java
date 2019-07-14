@@ -33,6 +33,16 @@ public class Deck {
 			
 	}
 	
+	public int getIndex(int block){
+		int index = 0;
+		for(int i = 0; i < tower.size(); i ++){
+			if(tower.get(i) == block){
+                  index = i;
+			}
+		}
+		return index;
+	}
+
 	public int[] newTower(int initHeight) {
 		int[] newT = new int[initHeight];
 		for(int i = 0; i < newT.length; i ++) {
@@ -40,9 +50,9 @@ public class Deck {
 		}
 		return newT;
 	}
-	public void showCard(){
+	public String showCard(){
 		   String result = Integer.toString(tower.get(0));
-		   System.out.println("The card you can choose is:" + result);
+		   return result;
 	}
 	
 	public void replace(int index, int[] playerT) {

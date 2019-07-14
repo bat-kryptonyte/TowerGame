@@ -28,7 +28,6 @@ public class Deck {
 			if(t.get(i).intValue() == block) {		
 				return true;
 			}
-			
 		}
 		return value;
 			
@@ -40,6 +39,22 @@ public class Deck {
 			newT[i] = tower.remove(0);
 		}
 		return newT;
+	}
+	public void showCard()
+	
+	public void replace(int index, int[] playerT) {
+		int temp = playerT[index];
+		playerT[index] = tower.remove(0);
+		tower.add(temp, 0);
+	}
+
+	public String displayTower(int[] pt){
+		String result = "";
+		for(int i = 0; i < pt.length; i ++){
+            result += pt[i] + " ";
+		}
+		return "This is your deck: " + result;
+
 	}
 //Test
 	

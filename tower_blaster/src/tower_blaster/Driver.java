@@ -1,14 +1,16 @@
 package tower_blaster;
-
+import java.util.Scanner;
 public class Driver {
 	public static void main(String[] args) {
-		Deck tower = new Deck(20);
-		tower.shuffle();
-		System.out.print(tower.toString());
-		//Test
-		int[] newT = tower.newTower(10);
-		for(int i = 0; i < newT.length; i ++) {
-			System.out.print(newT[i] + " ");
+		while(true){
+			Deck tower = new Deck(50);
+			tower.shuffle();
+			int[] pt = tower.newTower(10);
+			int[] vikings = tower.newTower(10);
+			
+
+
+
 		}
 		
 	}

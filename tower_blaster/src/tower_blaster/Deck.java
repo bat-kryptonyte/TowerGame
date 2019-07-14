@@ -40,7 +40,10 @@ public class Deck {
 		}
 		return newT;
 	}
-	public void showCard()
+	public void showCard(){
+		   String result = Integer.toString(tower.get(0));
+		   System.out.println("The card you can choose is:" + result);
+	}
 	
 	public void replace(int index, int[] playerT) {
 		int temp = playerT[index];

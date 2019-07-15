@@ -12,7 +12,7 @@ public class Driver {
 			tower.shuffle();
 			int[] pt = tower.newTower(USER_TOWER_HEIGHT);
 			int[] vikings = tower.newTower(USER_TOWER_HEIGHT);
-			while(! isWin(pt) && ! isWin(vikings)){
+			while(! isWin(pt) || ! isWin(vikings)){
 				//User steps
 				System.out.println(tower.displayTower(pt));
 

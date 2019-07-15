@@ -12,16 +12,19 @@ public class Driver {
 			int[] pt = tower.newTower(10);
 			int[] vikings = tower.newTower(10);
 			while(! isWin(pt) && ! isWin(vikings)){
+				//User steps
 				System.out.println(tower.displayTower(pt));
 
 				System.out.println("The card you can choose is: " + discardPile.showCard() + "or you can choose UNKNOWN");
+				System.out.println("Please select your choice");
 				String userInput = kb.next();
 				if(userInput.equalsIgnoreCase(discardPile.showCard())){
 					System.out.println("Please enter the block you wish to switch");
 					int userChoice = kb.nextInt();
 					int ind = tower.getIndex(userChoice, pt); //weird method tb fixed
 					discardPile.replace(ind, pt, discardPile);
-				}else if(userInput.equalsIgnoreCase("UNKNOWN")){
+					System.out.println(tower.displayTower(pt));
+				}else if(userInput.equalsIgnoreCase("UNKNOWN")){}
 					System.out.println("The card you can choose is: " + tower.showCard());
 					System.out.println("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED");
 					String uI = kb.next();
@@ -30,10 +33,28 @@ public class Driver {
 						int userChoice = kb.nextInt();
 						int ind = tower.getIndex(userChoice, pt);// weird method to be fixed
 						tower.replace(ind, pt, discardPile);
+						System.out.println(tower.displayTower(pt));
 					}else if(uI.equalsIgnoreCase("DISCARD")){
+						tower.replaceA(discardPile);
+						System.out.println(tower.displayTower(pt));
+					}
+				}
+
+				//Viking steps
+				boolean step1 = Math.random() < 0.5;
+				boolean step2 = Math.random() < 0.5;
+				int randV = (int)(Math.random() * 10);
+				int randV2 = (int)(Math.random() * 10);
+				if(step1){
+					discardPile.replace(randV, vikings, discardPile);
+				}else{
+					if(step2){
+						tower.replace(randV2, vikings, discardPile);
+					}else{
 						tower.replaceA(discardPile);
 					}
 				}
+
 			}
 
 

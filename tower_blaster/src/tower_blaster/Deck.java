@@ -7,7 +7,7 @@ public class Deck {
 	public Deck(int initSize)
 	{
 		tower = new ArrayList<Integer>();
-		for(int i = 1; i <= initSize; i ++) {
+		for(int i = 2; i <= initSize; i ++) {
 			tower.add(i);
 		}
 		
@@ -50,12 +50,13 @@ public class Deck {
 		}
 		return newT;
 	}
-    
+    /*
 	public ArrayList<Integer> discardPile(){
 		ArrayList<Integer> newP = new ArrayList<Integer>();
 		newP.add(tower.remove(0));
 		return newP;
 	}
+	*/
 
 	public void replaceA(Deck x){
 		x.getTower().add(tower.remove(0), 0);

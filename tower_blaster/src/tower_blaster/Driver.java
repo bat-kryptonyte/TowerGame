@@ -2,7 +2,6 @@ package tower_blaster;
 import java.util.*;
 public class Driver {
 	public static final int USER_TOWER_HEIGHT = 10;
-	private static final int[] pt = null;
 	public static void main(String[] args) {
 		while(true){
 			Scanner kb = new Scanner(System.in);
@@ -58,12 +57,16 @@ public class Driver {
 				}
 
 			}
-            if(isWin(pt)){
+            if (isWin(pt)) {
 				System.out.println("Congratulations! You have won!");
-			}else if(isWin(vikings)){
+				kb.close();
+				break;
+			} else if (isWin(vikings)) {
 				System.out.println("You have lost! Good Luck next time!");
+				kb.close();
+				break;
 			}
-         
+   
 
 		}
 		

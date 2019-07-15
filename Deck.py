@@ -63,6 +63,7 @@ def main():
 		tower.replace_a(discardPile)
 		print(display_tower(pt))
 		while not is_win(pt) or not is_win(vikings):
+			#User
 			print("Points: " + str(points))
 			user_input = input("The card you can choose is: " + discardPile.show_card() + "or you can choose UNKNOWN")
 			if user_input.lower() == discardPile.show_card().lower():
@@ -83,6 +84,7 @@ def main():
 				elif u_i.lower() == "DISCARD".lower():
 					tower.replace_a(discardPile)
 					print(display_tower(pt))
+			#Viking
 			step1 = random.random() < 0.5
 			step2 = random.random() < 0.5
 			rand_v = int(random.random() * USER_TOWER_HEIGHT)

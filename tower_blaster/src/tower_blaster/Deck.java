@@ -26,18 +26,7 @@ public class Deck {
 		}
 		
 	}
-	/*private boolean hasBlock(ArrayList<Integer> t, int block) {
-		boolean value = false;
-		for(int i = 0; i < t.size(); i++) {
-			if(t.get(i).intValue() == block) {		
-				return true;
-			}
-		}
-		return value;
-			
-	}
-	*/
-
+	
 	public int[] newTower(int initHeight) {
 		int[] newT = new int[initHeight];
 		for(int i = 0; i < newT.length; i ++) {
@@ -45,13 +34,6 @@ public class Deck {
 		}
 		return newT;
 	}
-    /*
-	public ArrayList<Integer> discardPile(){
-		ArrayList<Integer> newP = new ArrayList<Integer>();
-		newP.add(tower.remove(0));
-		return newP;
-	}
-	*/
 
 	public void replaceA(Deck x){
 		x.getTower().add(0, tower.remove(0));
@@ -68,18 +50,7 @@ public class Deck {
 		playerT[index] = tower.remove(0);
 		x.getTower().add(0, temp);
 	}
-	
-	/*
-	public String displayTower(int[] pt){
-		String result = "";
-		for(int i = 0; i < pt.length; i ++){
-            result += pt[i] + " ";
-		}
-		return "This is your deck: " + result;
 
-	}
-	*/
-//Test
 	public ArrayList<Integer> getTower(){
 		return tower;
 	}

@@ -24,7 +24,7 @@ public class Driver {
 				if(userInput.equalsIgnoreCase(discardPile.showCard())){
 					System.out.println("Please enter the block you wish to switch: ");
 					int userChoice = kb.nextInt();
-					int ind = getIndex(userChoice, pt); //weird method tb fixed
+					int ind = getIndex(userChoice, pt); 
 					discardPile.replace(ind, pt, discardPile);
 					score += getScore(pt, ind);
 					System.out.println(displayTower(pt));
@@ -36,7 +36,7 @@ public class Driver {
 					if(uI.equalsIgnoreCase("YES")){
 						System.out.println("Please enter the block you wish to switch: ");
 						int userChoice = kb.nextInt();
-						int ind = getIndex(userChoice, pt);// weird method to be fixed
+						int ind = getIndex(userChoice, pt);
 						tower.replace(ind, pt, discardPile);
 						score += getScore(pt, ind);
 						System.out.println(displayTower(pt));

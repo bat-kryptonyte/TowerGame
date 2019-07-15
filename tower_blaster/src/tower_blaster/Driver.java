@@ -12,7 +12,7 @@ public class Driver {
 			int[] pt = tower.newTower(USER_TOWER_HEIGHT);
 			int[] vikings = tower.newTower(USER_TOWER_HEIGHT);
 			Deck discardPile = new Deck(0);
-			discardPile.replaceA(tower);
+			tower.replaceA(discardPile);
 			System.out.println(tower.displayTower(pt));
 			while(! isWin(pt) || ! isWin(vikings)){
 				//User steps

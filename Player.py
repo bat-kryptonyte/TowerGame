@@ -3,7 +3,7 @@ class player(object):
         '''Returns a boolean indicating whether to choose to use the first card or not. '''
         raise NotImplementedError
 
-    def cheat_choice(num, tower, ptower, discard_pile, deck):
+    def choice(num, tower, ptower, discard_pile, deck):
         '''Decide when knowing all decks. '''
         raise NotImplementedError
 

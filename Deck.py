@@ -38,6 +38,19 @@ def is_win(tower):
 def get_index(block, pt):
 		return pt.index(block)
 
+def score(block, pt):
+	cont = [pt[0]]
+	for i in range(1, len(pt)):
+		if pt[i] - pt[i - 1] == 1:
+			cont.append(pt[i])
+		else:
+			if block in cont:
+				return block * len(cont) * len(cont)
+			else:
+				cont = [pt[i]]
+	if block in cont:
+				return block * len(cont) * len(cont)
+
 def main():
 	while True:
 		tl = int(input("Please enter your tower length: "))

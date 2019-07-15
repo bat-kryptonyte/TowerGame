@@ -33,10 +33,10 @@ public class Deck {
 			
 	}
 	
-	public int getIndex(int block){
+	public int getIndex(int block, int[] us){
 		int index = 0;
-		for(int i = 0; i < tower.size(); i ++){
-			if(tower.get(i) == block){
+		for(int i = 0; i < us.length; i ++){
+			if(us[i] == block){
                   index = i;
 			}
 		}
@@ -50,15 +50,27 @@ public class Deck {
 		}
 		return newT;
 	}
+    
+	public ArrayList<Integer> discardPile(){
+		ArrayList<Integer> newP = new ArrayList<Integer>();
+		newP.add(tower.remove(0));
+		return newP;
+	}
+
+	public void replaceA(Deck x){
+		x.getTower().add(tower.remove(0), 0);
+	}
+	
+	
 	public String showCard(){
 		   String result = Integer.toString(tower.get(0));
 		   return result;
 	}
 	
-	public void replace(int index, int[] playerT) {
+	public void replace(int index, int[] playerT, Deck x) {
 		int temp = playerT[index];
 		playerT[index] = tower.remove(0);
-		tower.add(temp, 0);
+		x.getTower().add(temp, 0);
 	}
 
 	public String displayTower(int[] pt){
@@ -70,7 +82,9 @@ public class Deck {
 
 	}
 //Test
-	
+	public ArrayList<Integer> getTower(){
+		return tower;
+	}
 	public String toString() {
 		String sum = "";
 		for(int i = 0; i < tower.size(); i ++ ) {

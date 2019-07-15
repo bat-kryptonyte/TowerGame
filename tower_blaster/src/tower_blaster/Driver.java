@@ -1,6 +1,8 @@
 package tower_blaster;
 import java.util.*;
 public class Driver {
+	public static final int USER_TOWER_HEIGHT = 10;
+	private static final int[] pt = null;
 	public static void main(String[] args) {
 		while(true){
 			Scanner kb = new Scanner(System.in);
@@ -9,8 +11,8 @@ public class Driver {
 			Deck tower = new Deck(tl - 1);
 			Deck discardPile = new Deck(1);
 			tower.shuffle();
-			int[] pt = tower.newTower(10);
-			int[] vikings = tower.newTower(10);
+			int[] pt = tower.newTower(USER_TOWER_HEIGHT);
+			int[] vikings = tower.newTower(USER_TOWER_HEIGHT);
 			while(! isWin(pt) && ! isWin(vikings)){
 				//User steps
 				System.out.println(tower.displayTower(pt));
@@ -24,7 +26,7 @@ public class Driver {
 					int ind = tower.getIndex(userChoice, pt); //weird method tb fixed
 					discardPile.replace(ind, pt, discardPile);
 					System.out.println(tower.displayTower(pt));
-				}else if(userInput.equalsIgnoreCase("UNKNOWN")){}
+				}else if(userInput.equalsIgnoreCase("UNKNOWN")){
 					System.out.println("The card you can choose is: " + tower.showCard());
 					System.out.println("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED");
 					String uI = kb.next();
@@ -43,8 +45,8 @@ public class Driver {
 				//Viking steps
 				boolean step1 = Math.random() < 0.5;
 				boolean step2 = Math.random() < 0.5;
-				int randV = (int)(Math.random() * 10);
-				int randV2 = (int)(Math.random() * 10);
+				int randV = (int)(Math.random() * USER_TOWER_HEIGHT);
+				int randV2 = (int)(Math.random() * USER_TOWER_HEIGHT);
 				if(step1){
 					discardPile.replace(randV, vikings, discardPile);
 				}else{
@@ -56,8 +58,12 @@ public class Driver {
 				}
 
 			}
-
-
+            if(isWin(pt)){
+				System.out.println("Congratulations! You have won!");
+			}else if(isWin(vikings)){
+				System.out.println("You have lost! Good Luck next time!");
+			}
+         
 
 		}
 		

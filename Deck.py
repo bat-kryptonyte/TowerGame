@@ -1,13 +1,10 @@
 import random
 USER_TOWER_HEIGHT = 10
 class Deck(object):
-	def __init__(self, size, mode):
-		if mode:
-			self.tower = []
-			for i in range(size + 1):
-				self.tower.append(i + 1)
-		else:
-			self.tower = size
+	def __init__(self, size):
+		self.tower = []
+		for i in range(1, size + 1):
+			self.tower.append(i)
 
 	def shuffle(self):
 		random.shuffle(self.tower)
@@ -44,13 +41,14 @@ def get_index(block, pt):
 def main():
 	while True:
 		tl = int(input("Please enter your tower length: "))
-		tower = Deck(tl - 1)
-		discardPile = Deck(0)
+		tower = Deck(tl)
 		tower.shuffle()
 		pt = tower.new_tower(USER_TOWER_HEIGHT)
 		vikings = tower.new_tower(USER_TOWER_HEIGHT)
+		discardPile = Deck(0)
+		tower.replace_a(discardPile)
+		print(display_tower(pt))
 		while not is_win(pt) or not is_win(vikings):
-			print(display_tower(pt))
 			user_input = input("The card you can choose is: " + discardPile.show_card() + "or you can choose UNKNOWN")
 			if user_input.lower() == discardPile.show_card().lower():
 				user_choice = int(input("Please enter the block you wish to switch"))

@@ -71,7 +71,7 @@ public class Deck {
 	public void replace(int index, int[] playerT, Deck x) {
 		int temp = playerT[index];
 		playerT[index] = tower.remove(0);
-		x.getTower().add(temp, 0);
+		x.getTower().add(0, temp);
 	}
 
 	public String displayTower(int[] pt){

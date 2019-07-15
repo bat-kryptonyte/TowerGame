@@ -55,6 +55,11 @@ public class Driver {
 						tower.replaceA(discardPile);
 					}
 				}
+				if(isWin(pt)) {
+					break;
+				}else if(isWin(vikings)){
+					break;
+				}
 
 			}
             if (isWin(pt)) {

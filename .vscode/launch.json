@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Debug (Launch) - External Terminal",
+            "request": "launch",
+            "console": "externalTerminal",
+            "mainClass": "tower_blaster.Driver"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Driver",
             "request": "launch",
             "mainClass": "tower_blaster.Driver",

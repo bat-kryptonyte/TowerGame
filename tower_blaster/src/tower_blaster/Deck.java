@@ -7,8 +7,8 @@ public class Deck {
 	public Deck(int initSize)
 	{
 		tower = new ArrayList<Integer>();
-		for(int i = 2; i <= initSize; i ++) {
-			tower.add(i);
+		for(int i = 0; i <= initSize; i ++) {
+			tower.add(i + 1);
 		}
 		
 	}

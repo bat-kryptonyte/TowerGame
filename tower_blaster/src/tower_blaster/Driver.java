@@ -8,7 +8,7 @@ public class Driver {
 			System.out.println("Please enter your tower length");
 			int tl = kb.nextInt();
 			Deck tower = new Deck(tl - 1);
-			Deck discardPile = new Deck(1);
+			Deck discardPile = new Deck(0);
 			tower.shuffle();
 			int[] pt = tower.newTower(USER_TOWER_HEIGHT);
 			int[] vikings = tower.newTower(USER_TOWER_HEIGHT);

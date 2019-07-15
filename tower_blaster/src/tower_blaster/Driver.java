@@ -12,9 +12,9 @@ public class Driver {
 			tower.shuffle();
 			int[] pt = tower.newTower(USER_TOWER_HEIGHT);
 			int[] vikings = tower.newTower(USER_TOWER_HEIGHT);
+			System.out.println(tower.displayTower(pt));
 			while(! isWin(pt) || ! isWin(vikings)){
 				//User steps
-				System.out.println(tower.displayTower(pt));
 
 				System.out.println("The card you can choose is: " + discardPile.showCard() + "or you can choose UNKNOWN");
 				System.out.println("Please select your choice");

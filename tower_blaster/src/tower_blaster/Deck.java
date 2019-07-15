@@ -12,6 +12,10 @@ public class Deck {
 		}
 		
 	}
+
+	public Deck(ArrayList<Integer> t){
+		tower = t;
+	}
 	
 	public void shuffle() {
 		for(int i = tower.size() - 1; i >= 0; i --) {

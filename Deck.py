@@ -1,4 +1,5 @@
 import random
+USER_TOWER_HEIGHT = 10
 class Deck(Object):
 	def __init__(self, size):
 		self.tower = list(range(1, size + 1))
@@ -40,8 +41,8 @@ def main():
 		tower = Deck(tl - 1)
 		discardPile = Deck(tl - 1)
 		tower.shuffle()
-		pt = tower.new_tower(10)
-		vikings = tower.new_tower(10)
+		pt = tower.new_tower(USER_TOWER_HEIGHT)
+		vikings = tower.new_tower(USER_TOWER_HEIGHT)
 		while not is_win(pt) and not is_win(vikings):
 			print(display_tower(pt))
 			user_input = input("The card you can choose is: " + discardPile.showCard() + "or you can choose UNKNOWN")
@@ -61,8 +62,8 @@ def main():
 					print(display_tower(pt))
 			step1 = random.random() < 0.5
 			step2 = random.random() < 0.5
-			rand_v = int(random.random() * 10)
-			rand_v2 = int(random.random() * 10)
+			rand_v = int(random.random() * USER_TOWER_HEIGHT)
+			rand_v2 = int(random.random() * USER_TOWER_HEIGHT)
 			if step1:
 				discardPile.replace(rand_v, vikings, discardPile)
 			else:
@@ -70,3 +71,9 @@ def main():
 					tower.replace(rand_v2, vikings, discardPile)
 				else:
 					tower.replace_a(discardPile)
+		if is_win(pt):
+			print("Congratulations! You have won!")
+			break
+		elif is_win(vikings):
+			print("You have lost! Good Luck next time!")
+			break

@@ -21,10 +21,20 @@ public class Driver {
 				System.out.println("The card you can choose is: " + discardPile.showCard() + " or you can choose UNKNOWN");
 				System.out.println("Please select your choice: ");
 				String userInput = kb.next();
+				//error check loop
+				while (!userInput.equalsIgnoreCase(discardPile.showCard()) && !userInput.equalsIgnoreCase("UNKNOWN")) {
+					System.out.println("Please enter a valid answer");
+					userInput = kb.next();
+				}
 				if(userInput.equalsIgnoreCase(discardPile.showCard())){
 					System.out.println("Please enter the block you wish to switch: ");
 					int userChoice = kb.nextInt();
-					int ind = getIndex(userChoice, pt); 
+	                //error check loop
+					while(getIndex(userChoice,pt) == -1){
+						System.out.println("Please enter a valid choice");
+						userChoice = kb.nextInt();
+					}
+					int ind = getIndex(userChoice, pt);
 					discardPile.replace(ind, pt, discardPile);
 					score += getScore(pt, ind);
 					System.out.println(displayTower(pt));
@@ -33,9 +43,19 @@ public class Driver {
 					System.out.println("The card you can choose is: " + tower.showCard());
 					System.out.println("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED: ");
 					String uI = kb.next();
+					//error check loop
+					while(! uI.equalsIgnoreCase("YES")&& ! uI.equalsIgnoreCase("DISCARD")){
+						System.out.println("Please enter a valid choice");
+						uI = kb.next();
+					}
 					if(uI.equalsIgnoreCase("YES")){
 						System.out.println("Please enter the block you wish to switch: ");
 						int userChoice = kb.nextInt();
+						//error check loop
+						while (getIndex(userChoice, pt) == -1) {
+							System.out.println("Please enter a valid choice");
+							userChoice = kb.nextInt();
+						}
 						int ind = getIndex(userChoice, pt);
 						tower.replace(ind, pt, discardPile);
 						score += getScore(pt, ind);
@@ -46,6 +66,8 @@ public class Driver {
 						System.out.println(displayTower(pt));
 					}
 				}
+					
+				
 
 				//Viking steps
 				boolean step1 = Math.random() < 0.5;

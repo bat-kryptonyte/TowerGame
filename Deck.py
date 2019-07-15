@@ -2,14 +2,17 @@ import random
 USER_TOWER_HEIGHT = 10
 class Deck(object):
 	def __init__(self, size):
-		self.tower = list(range(1, size + 1))
+		self.tower = []
+		for i in range(size + 1):
+			self.tower.append(i + 1)
 
 	def shuffle(self):
 		random.shuffle(self.tower)
 
 	def new_tower(self, size):
-		result = self.tower[0:size]
-		self.tower = self.tower[size:]
+		result = []
+		for i in range(size):
+			result.append(self.tower.pop(0))
 		return result
 
 	def show_card(self):
@@ -20,9 +23,6 @@ class Deck(object):
 		player_t[index] = self.tower.pop(0)
 		x.get_tower().insert(0, temp)
 
-	def get_index(self, block):
-		return self.tower.index(block)
-	
 	def get_tower(self):
 		return self.tower
 
@@ -33,29 +33,32 @@ def display_tower(pt):
 		return "This is your deck: " + str(pt)
 
 def is_win(tower):
-		return tower == tower.sort()
+		return tower == tower[:].sort()
+
+def get_index(block, pt):
+		return pt.index(block)
 
 def main():
 	while True:
 		tl = int(input("Please enter your tower length: "))
 		tower = Deck(tl - 1)
-		discardPile = Deck(tl - 1)
+		discardPile = Deck(0)
 		tower.shuffle()
 		pt = tower.new_tower(USER_TOWER_HEIGHT)
 		vikings = tower.new_tower(USER_TOWER_HEIGHT)
 		while not is_win(pt) or not is_win(vikings):
 			print(display_tower(pt))
 			user_input = input("The card you can choose is: " + discardPile.show_card() + "or you can choose UNKNOWN")
-			if user_input.lower() == tower.show_card().lower():
+			if user_input.lower() == discardPile.show_card().lower():
 				user_choice = int(input("Please enter the block you wish to switch"))
-				discardPile.replace(tower.get_index(user_choice), pt, discardPile)
+				discardPile.replace(get_index(user_choice, pt), pt, discardPile)
 				print(display_tower(pt))
 			elif user_input.lower() == "UNKNOWN".lower():
-				print("The card you can choose is: " + tower.showCard())
+				print("The card you can choose is: " + tower.show_card())
 				u_i = input("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED")
 				if u_i.lower() == "YES".lower():
-					u_c = input("Please enter the block you wish to switch")
-					tower.replace(tower.get_index(u_c, pt), pt, discardPile)
+					u_c = int(input("Please enter the block you wish to switch"))
+					tower.replace(get_index(u_c, pt), pt, discardPile)
 					print(display_tower(pt))
 				elif u_i.lower() == "DISCARD".lower():
 					tower.replace_a(discardPile)

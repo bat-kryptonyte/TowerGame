@@ -12,7 +12,7 @@ public class Driver {
 			tower.shuffle();
 			int[] pt = tower.newTower(USER_TOWER_HEIGHT);
 			int[] vikings = tower.newTower(USER_TOWER_HEIGHT);
-			while(! isWin(pt) && ! isWin(vikings)){
+			while(! isWin(pt) || ! isWin(vikings)){
 				//User steps
 				System.out.println(tower.displayTower(pt));
 
@@ -59,12 +59,24 @@ public class Driver {
 			}
             if (isWin(pt)) {
 				System.out.println("Congratulations! You have won!");
-				kb.close();
-				break;
+				System.out.println("Would you like to play again(YES or NO)");
+				String input = kb.next();
+				if(input.equalsIgnoreCase("YES")){
+					continue;
+				}else{
+					kb.close();
+					break;
+				}
 			} else if (isWin(vikings)) {
 				System.out.println("You have lost! Good Luck next time!");
-				kb.close();
-				break;
+				System.out.println("Would you like to play again(YES or NO)");
+				String input = kb.next();
+				if (input.equalsIgnoreCase("YES")) {
+					continue;
+				} else {
+					kb.close();
+					break;
+				}
 			}
    
 

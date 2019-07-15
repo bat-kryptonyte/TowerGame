@@ -1,10 +1,13 @@
 import random
 USER_TOWER_HEIGHT = 10
 class Deck(object):
-	def __init__(self, size):
-		self.tower = []
-		for i in range(size + 1):
-			self.tower.append(i + 1)
+	def __init__(self, size, mode):
+		if mode:
+			self.tower = []
+			for i in range(size + 1):
+				self.tower.append(i + 1)
+		else:
+			self.tower = size
 
 	def shuffle(self):
 		random.shuffle(self.tower)

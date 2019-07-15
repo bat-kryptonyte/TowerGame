@@ -13,32 +13,32 @@ public class Driver {
 			int[] vikings = tower.newTower(USER_TOWER_HEIGHT);
 			Deck discardPile = new Deck(0);
 			tower.replaceA(discardPile);
-			System.out.println(tower.displayTower(pt));
+			System.out.println(displayTower(pt));
 			while(! isWin(pt) || ! isWin(vikings)){
 				//User steps
 
-				System.out.println("The card you can choose is: " + discardPile.showCard() + "or you can choose UNKNOWN");
-				System.out.println("Please select your choice");
+				System.out.println("The card you can choose is: " + discardPile.showCard() + " or you can choose UNKNOWN");
+				System.out.println("Please select your choice: ");
 				String userInput = kb.next();
 				if(userInput.equalsIgnoreCase(discardPile.showCard())){
-					System.out.println("Please enter the block you wish to switch");
+					System.out.println("Please enter the block you wish to switch: ");
 					int userChoice = kb.nextInt();
-					int ind = tower.getIndex(userChoice, pt); //weird method tb fixed
+					int ind = getIndex(userChoice, pt); //weird method tb fixed
 					discardPile.replace(ind, pt, discardPile);
-					System.out.println(tower.displayTower(pt));
+					System.out.println(displayTower(pt));
 				}else if(userInput.equalsIgnoreCase("UNKNOWN")){
 					System.out.println("The card you can choose is: " + tower.showCard());
-					System.out.println("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED");
+					System.out.println("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED: ");
 					String uI = kb.next();
 					if(uI.equalsIgnoreCase("YES")){
-						System.out.println("Please enter the block you wish to switch");
+						System.out.println("Please enter the block you wish to switch: ");
 						int userChoice = kb.nextInt();
-						int ind = tower.getIndex(userChoice, pt);// weird method to be fixed
+						int ind = getIndex(userChoice, pt);// weird method to be fixed
 						tower.replace(ind, pt, discardPile);
-						System.out.println(tower.displayTower(pt));
+						System.out.println(displayTower(pt));
 					}else if(uI.equalsIgnoreCase("DISCARD")){
 						tower.replaceA(discardPile);
-						System.out.println(tower.displayTower(pt));
+						System.out.println(displayTower(pt));
 					}
 				}
 
@@ -65,7 +65,7 @@ public class Driver {
 			}
             if (isWin(pt)) {
 				System.out.println("Congratulations! You have won!");
-				System.out.println("Would you like to play again(YES or NO)");
+				System.out.println("Would you like to play again(YES or NO): ");
 				String input = kb.next();
 				if(input.equalsIgnoreCase("YES")){
 					continue;
@@ -75,7 +75,7 @@ public class Driver {
 				}
 			} else if (isWin(vikings)) {
 				System.out.println("You have lost! Good Luck next time!");
-				System.out.println("Would you like to play again(YES or NO)");
+				System.out.println("Would you like to play again(YES or NO): ");
 				String input = kb.next();
 				if (input.equalsIgnoreCase("YES")) {
 					continue;
@@ -90,6 +90,25 @@ public class Driver {
 		
 	}
 	
+	public static int getIndex(int block, int[] us){
+		int index = 0;
+		for (int i = 0; i < us.length; i++) {
+			if (us[i] == block) {
+				index = i;
+			}
+		}
+		return index;
+	}
+
+	public static String displayTower(int[] pt) {
+		String result = "";
+		for (int i = 0; i < pt.length; i++) {
+			result += pt[i] + " ";
+		}
+		return "This is your deck: " + result;
+
+	}
+
 	public static boolean isWin(int[] playerTower) {
 		boolean value = true;
 		int[] pt = new int[playerTower.length];

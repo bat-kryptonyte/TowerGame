@@ -59,12 +59,24 @@ public class Driver {
 			}
             if (isWin(pt)) {
 				System.out.println("Congratulations! You have won!");
-				kb.close();
-				break;
+				System.out.println("Would you like to play again(YES or NO)");
+				String input = kb.next();
+				if(input.equalsIgnoreCase("YES")){
+					continue;
+				}else{
+					kb.close();
+					break;
+				}
 			} else if (isWin(vikings)) {
 				System.out.println("You have lost! Good Luck next time!");
-				kb.close();
-				break;
+				System.out.println("Would you like to play again(YES or NO)");
+				String input = kb.next();
+				if (input.equalsIgnoreCase("YES")) {
+					continue;
+				} else {
+					kb.close();
+					break;
+				}
 			}
    
 

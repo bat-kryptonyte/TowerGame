@@ -6,20 +6,6 @@
             "request": "launch",
             "console": "externalTerminal",
             "mainClass": "tower_blaster.Driver"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - Driver",
-            "request": "launch",
-            "mainClass": "tower_blaster.Driver",
-            "projectName": "tower_blaster"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - Driver",
-            "request": "launch",
-            "mainClass": "tower_blaster.src.tower_blaster.Driver",
-            "projectName": "TowerGame_9c6df74c"
         }
     ]
 }

@@ -90,6 +90,22 @@ public class Driver {
 		
 	}
 	
+	public static int getScore(int[] playerTower, int userIndex){
+		ArrayList<Integer> tempPile = new ArrayList<Integer>();
+		int count = 0;
+		for(int i = 1; i < playerTower.length; i ++){
+			if(playerTower[i] - playerTower[i - 1] == 1){
+				tempPile.add(i - 1);
+			}
+		}
+		for(int i = 0; i < tempPile.size(); i ++){
+			if(tempPile.get(userIndex) - tempPile.get(i) == userIndex - i){
+				count ++;
+			}
+		}
+		return count;
+	}
+	
 	public static int getIndex(int block, int[] us){
 		int index = 0;
 		for (int i = 0; i < us.length; i++) {

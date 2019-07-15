@@ -1,16 +1,16 @@
-class abstract_robot(object):
+class player(object):
     def choice(num, tower):
         '''Returns a boolean indicating whether to choose to use the first card or not. '''
-        pass
+        raise NotImplementedError
 
-    def chear_choice(num, tower, ptower, discard_pile, deck):
+    def cheat_choice(num, tower, ptower, discard_pile, deck):
         '''Decide when knowing all decks. '''
-        pass
+        raise NotImplementedError
 
     def get_normal_move(num, tower):
         '''Returns the number to be replaced when choosing the first card. '''
-        pass
+        raise NotImplementedError
     
     def get_question_move(num, tower):
         '''Returns the number to be replaced when choosing the question card, -1 for discard. '''
-        pass
+        raise NotImplementedError

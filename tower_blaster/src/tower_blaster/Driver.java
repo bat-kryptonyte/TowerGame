@@ -5,7 +5,7 @@ public class Driver {
 	public static void main(String[] args) {
 		while(true){
 			Scanner kb = new Scanner(System.in);
-			System.out.println("Please enter your tower length");
+			System.out.println("Please enter your total Deck length(ENTER 50, pls)");
 			int tl = kb.nextInt();
 			int score = 0;
 			Deck tower = new Deck(tl);
@@ -15,6 +15,7 @@ public class Driver {
 			Deck discardPile = new Deck(0);
 			tower.replaceA(discardPile);
 			System.out.println(displayTower(pt));
+			System.out.println(displayTower(vikings) + "<---- Your scout had uncovered an enemy raven");
 			while(! isWin(pt) || ! isWin(vikings)){
 				//User steps
 
@@ -92,6 +93,7 @@ public class Driver {
 			}
             if (isWin(pt)) {
 				System.out.println("Congratulations! You have won!");
+				System.out.println("FINAL SCORE: " + score);
 				System.out.println("Would you like to play again(YES or NO): ");
 				String input = kb.next();
 				if(input.equalsIgnoreCase("YES")){
@@ -102,6 +104,7 @@ public class Driver {
 				}
 			} else if (isWin(vikings)) {
 				System.out.println("You have lost! Good Luck next time!");
+				System.out.println("FINAL SCORE: " + score);
 				System.out.println("Would you like to play again(YES or NO): ");
 				String input = kb.next();
 				if (input.equalsIgnoreCase("YES")) {

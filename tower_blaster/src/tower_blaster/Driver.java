@@ -7,6 +7,7 @@ public class Driver {
 			Scanner kb = new Scanner(System.in);
 			System.out.println("Please enter your tower length");
 			int tl = kb.nextInt();
+			int score = 0;
 			Deck tower = new Deck(tl);
 			tower.shuffle();
 			int[] pt = tower.newTower(USER_TOWER_HEIGHT);
@@ -25,7 +26,9 @@ public class Driver {
 					int userChoice = kb.nextInt();
 					int ind = getIndex(userChoice, pt); //weird method tb fixed
 					discardPile.replace(ind, pt, discardPile);
+					score += getScore(pt, ind);
 					System.out.println(displayTower(pt));
+					System.out.println("Your score is currently at : " + score);
 				}else if(userInput.equalsIgnoreCase("UNKNOWN")){
 					System.out.println("The card you can choose is: " + tower.showCard());
 					System.out.println("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED: ");
@@ -35,7 +38,9 @@ public class Driver {
 						int userChoice = kb.nextInt();
 						int ind = getIndex(userChoice, pt);// weird method to be fixed
 						tower.replace(ind, pt, discardPile);
+						score += getScore(pt, ind);
 						System.out.println(displayTower(pt));
+						System.out.println("Your score is currently at : " + score);
 					}else if(uI.equalsIgnoreCase("DISCARD")){
 						tower.replaceA(discardPile);
 						System.out.println(displayTower(pt));
@@ -93,17 +98,21 @@ public class Driver {
 	public static int getScore(int[] playerTower, int userIndex){
 		ArrayList<Integer> tempPile = new ArrayList<Integer>();
 		int count = 0;
+		int arrInd = 0;
 		for(int i = 1; i < playerTower.length; i ++){
 			if(playerTower[i] - playerTower[i - 1] == 1){
 				tempPile.add(i - 1);
+				if(i - 1 == userIndex){
+					arrInd = tempPile.get(tempPile.size() - 1);
+				}
 			}
 		}
 		for(int i = 0; i < tempPile.size(); i ++){
-			if(tempPile.get(userIndex) - tempPile.get(i) == userIndex - i){
+			if(tempPile.get(arrInd) - tempPile.get(i) == arrInd - i){
 				count ++;
 			}
 		}
-		return count;
+		return (int) (Math.pow(count, 2) * playerTower[userIndex]);
 	}
 	
 	public static int getIndex(int block, int[] us){

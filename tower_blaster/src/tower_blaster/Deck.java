@@ -59,7 +59,7 @@ public class Deck {
 	*/
 
 	public void replaceA(Deck x){
-		x.getTower().add(tower.remove(0), 0);
+		x.getTower().add(0, tower.remove(0));
 	}
 	
 	

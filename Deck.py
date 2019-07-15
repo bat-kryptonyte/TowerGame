@@ -76,9 +76,17 @@ def main():
 					tower.replace_a(discardPile)
 		if is_win(pt):
 			print("Congratulations! You have won!")
-			break
+			again = input("Would you like to play again(YES or NO)")
+			if again.lower() == "YES".lower():
+				continue
+			else:
+				break
 		elif is_win(vikings):
 			print("You have lost! Good Luck next time!")
-			break
+			again = input("Would you like to play again(YES or NO)")
+			if again.lower() == "YES".lower():
+				continue
+			else:
+				break
 
 main()

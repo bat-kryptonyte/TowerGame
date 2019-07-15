@@ -7,11 +7,12 @@ public class Driver {
 			Scanner kb = new Scanner(System.in);
 			System.out.println("Please enter your tower length");
 			int tl = kb.nextInt();
-			Deck tower = new Deck(tl - 1);
-			Deck discardPile = new Deck(0);
+			Deck tower = new Deck(tl);
 			tower.shuffle();
 			int[] pt = tower.newTower(USER_TOWER_HEIGHT);
 			int[] vikings = tower.newTower(USER_TOWER_HEIGHT);
+			Deck discardPile = new Deck(0);
+			discardPile.replaceA(tower);
 			System.out.println(tower.displayTower(pt));
 			while(! isWin(pt) || ! isWin(vikings)){
 				//User steps

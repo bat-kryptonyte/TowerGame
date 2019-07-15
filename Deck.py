@@ -48,5 +48,25 @@ def main():
 			if user_input.lower() == tower.show_card().lower():
 				user_choice = int(input("Please enter the block you wish to switch"))
 				discardPile.replace(tower.get_index(user_choice), pt, discardPile)
+				print(display_tower(pt))
 			elif user_input.lower() == "UNKNOWN".lower():
-				pass
+				print("The card you can choose is: " + tower.showCard())
+				u_i = input("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED")
+				if u_i.lower() == "YES".lower():
+					u_c = input("Please enter the block you wish to switch")
+					tower.replace(tower.get_index(u_c, pt), pt, discardPile)
+					print(display_tower(pt))
+				elif u_i.lower() == "DISCARD".lower():
+					tower.replace_a(discardPile)
+					print(display_tower(pt))
+			step1 = random.random() < 0.5
+			step2 = random.random() < 0.5
+			rand_v = int(random.random() * 10)
+			rand_v2 = int(random.random() * 10)
+			if step1:
+				discardPile.replace(rand_v, vikings, discardPile)
+			else:
+				if step2:
+					tower.replace(rand_v2, vikings, discardPile)
+				else:
+					tower.replace_a(discardPile)

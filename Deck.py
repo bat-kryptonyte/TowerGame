@@ -53,6 +53,7 @@ def score(block, pt):
 
 def main():
 	while True:
+		points = 0
 		tl = int(input("Please enter your tower length: "))
 		tower = Deck(tl)
 		tower.shuffle()
@@ -62,17 +63,22 @@ def main():
 		tower.replace_a(discardPile)
 		print(display_tower(pt))
 		while not is_win(pt) or not is_win(vikings):
+			print("Points: " + str(points))
 			user_input = input("The card you can choose is: " + discardPile.show_card() + "or you can choose UNKNOWN")
 			if user_input.lower() == discardPile.show_card().lower():
 				user_choice = int(input("Please enter the block you wish to switch"))
+				num = int(discardPile.show_card())
 				discardPile.replace(get_index(user_choice, pt), pt, discardPile)
+				points += score(num, pt)
 				print(display_tower(pt))
 			elif user_input.lower() == "UNKNOWN".lower():
 				print("The card you can choose is: " + tower.show_card())
 				u_i = input("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED")
 				if u_i.lower() == "YES".lower():
 					u_c = int(input("Please enter the block you wish to switch"))
+					num = int(tower.show_card())
 					tower.replace(get_index(u_c, pt), pt, discardPile)
+					points += score(num, pt)
 					print(display_tower(pt))
 				elif u_i.lower() == "DISCARD".lower():
 					tower.replace_a(discardPile)

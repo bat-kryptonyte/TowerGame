@@ -51,6 +51,25 @@ def score(block, pt):
 	if block in cont:
 				return block * len(cont) * len(cont)
 
+def count_order(playerTower):
+	a = []
+	max = 0
+	for x in range(1, len(playerTower)):
+		if(playerTower[x] > playerTower[x - 1] and playerTower[x] > max):
+			a.append(playerTower[x - 1])
+			max = playerTower[x - 1]
+	return (len(a) + 1)/USER_TOWER_HEIGHT * 100
+
+def compare_Move(playerTower, vikingTower):
+	x = count_order(playerTower)
+	y = count_order(vikingTower)
+	if(y > x):
+		return 1
+	elif(y == x):
+		return 0
+	else:
+		return -1
+
 def main():
 	while True:
 		points = 0
@@ -76,6 +95,7 @@ def main():
 				discardPile.replace(get_index(user_choice, pt), pt, discardPile)
 				points += score(num, pt)
 				print(display_tower(pt))
+				print("This is your current deck rating: " + str(count_order(pt)) + "%")
 			elif user_input.lower() == "UNKNOWN".lower():
 				print("The card you can choose is: " + tower.show_card())
 				u_i = input("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED ")
@@ -89,9 +109,13 @@ def main():
 					tower.replace(get_index(u_c, pt), pt, discardPile)
 					points += score(num, pt)
 					print(display_tower(pt))
+
+					print("This is your current deck rating: " + str(count_order(pt)) + "%")
 				elif u_i.lower() == "DISCARD".lower():
 					tower.replace_a(discardPile)
 					print(display_tower(pt))
+
+					print("This is your current deck rating: " + str(count_order(pt)) + "%")
 			#Viking
 			step1 = random.random() < 0.5
 			step2 = random.random() < 0.5
@@ -104,6 +128,11 @@ def main():
 					tower.replace(rand_v2, vikings, discardPile)
 				else:
 					tower.replace_a(discardPile)
+			if(is_win(pt)):
+				break
+			elif(is_win(vikings)):
+				break
+
 		if is_win(pt):
 			print("Congratulations! You have won! ")
 			again = input("Would you like to play again(YES or NO) ")

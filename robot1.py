@@ -39,10 +39,11 @@ def generate_tree(pt, rt, discard_pile, deck, node, player, p):
         if node == 0:
             return
         lst = get_available_moves(rt, discard_pile, deck)
+        print(lst)
         for m in lst:
             generate_tree(pt, m[0], m[1], m[2], node - 1, False, p_node)
     else:
-        p_node = Node(str(namelist.pop(0)), parent = p, move = [rt, discard_pile, deck])
+        p_node = Node(str(namelist.pop(0)), parent = p, move = [pt, discard_pile, deck])
         tree.append(p_node)
         if node == 0:
             return
@@ -62,6 +63,7 @@ rt = [46, 29, 5, 36, 44, 23, 42, 40, 26, 48]
 discard = [24]
 deck = [10, 22, 21, 39, 43, 14, 6, 35, 41, 11, 4, 28, 32, 33, 18, 13, 37, 16, 47, 38, 50, 3, 25, 31, 2, 49, 1, 20, 17]
 pt = [12, 34, 7, 8, 30, 45, 9, 27, 19, 15]
+#print(get_available_moves(rt, discard, deck))
 generate_tree(pt, rt, discard, deck, 2, True, None)
 t = RenderTree(tree[0])
 print(t)

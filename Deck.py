@@ -65,9 +65,9 @@ def main():
 		while not is_win(pt) or not is_win(vikings):
 			#User
 			print("Points: " + str(points))
-			user_input = input("The card you can choose is: " + discardPile.show_card() + "or you can choose UNKNOWN")
+			user_input = input("The card you can choose is: " + discardPile.show_card() + " or you can choose UNKNOWN")
 			if user_input.lower() == discardPile.show_card().lower():
-				user_choice = int(input("Please enter the block you wish to switch"))
+				user_choice = int(input("Please enter the block you wish to switch "))
 				num = int(discardPile.show_card())
 				discardPile.replace(get_index(user_choice, pt), pt, discardPile)
 				points += score(num, pt)

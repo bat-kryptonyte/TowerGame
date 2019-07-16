@@ -7,16 +7,6 @@ class robot1(player):
         if player:
             best = []
 
-class node(object):
-    def __init__(self, is_leaf, content, children):
-        self.is_leaf = is_leaf
-        self.content = content
-        if is_leaf:
-            self.children = None
-        else:
-            self.children = children
-
-
 tree = []
 namelist = list(range(21 ** 5))
 

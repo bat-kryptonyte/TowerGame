@@ -66,8 +66,12 @@ def main():
 			#User
 			print("Points: " + str(points))
 			user_input = input("The card you can choose is: " + discardPile.show_card() + " or you can choose UNKNOWN")
+			while(not user_input.lower() == discardPile.show_card().lower() or not user_input.lower() == "UNKNOWN".lower()):
+				user_input = input("Please enter a valid choice(" + discardPile.show_card() + " or UNKNOWN)")
 			if user_input.lower() == discardPile.show_card().lower():
 				user_choice = int(input("Please enter the block you wish to switch "))
+				while(pt.count(user_choice) == 0):
+					user_choice = int(input("Please enter the block you wish to switch"))
 				num = int(discardPile.show_card())
 				discardPile.replace(get_index(user_choice, pt), pt, discardPile)
 				points += score(num, pt)
@@ -75,8 +79,12 @@ def main():
 			elif user_input.lower() == "UNKNOWN".lower():
 				print("The card you can choose is: " + tower.show_card())
 				u_i = input("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED")
+				while(not u_i.lower() == "YES".lower() or not u_i.lower() == "DISCARD".lower()):
+					user_input = input("Please enter a valid choice(YES or DISCARD)")
 				if u_i.lower() == "YES".lower():
 					u_c = int(input("Please enter the block you wish to switch"))
+					while(pt.count(u_c) == 0):
+						u_c = int(input("Please enter the block you wish to switch"))
 					num = int(tower.show_card())
 					tower.replace(get_index(u_c, pt), pt, discardPile)
 					points += score(num, pt)
@@ -99,6 +107,8 @@ def main():
 		if is_win(pt):
 			print("Congratulations! You have won!")
 			again = input("Would you like to play again(YES or NO)")
+			while(not again.lower() == "YES".lower() or not again.lower() == "NO".lower()):
+				again = input("PLEASE ENTER YES or NO")
 			if again.lower() == "YES".lower():
 				continue
 			else:
@@ -106,6 +116,8 @@ def main():
 		elif is_win(vikings):
 			print("You have lost! Good Luck next time!")
 			again = input("Would you like to play again(YES or NO)")
+			while(not again.lower() == "YES".lower() or not again.lower() == "NO".lower()):
+				again = input("PLEASE ENTER YES or NO")
 			if again.lower() == "YES".lower():
 				continue
 			else:

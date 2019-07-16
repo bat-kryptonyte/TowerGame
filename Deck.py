@@ -51,15 +51,19 @@ def score(block, pt):
 	if block in cont:
 				return block * len(cont) * len(cont)
 
-def count_order(playerTower):
-	a = []
-	max = 0
-	for x in range(1, len(playerTower)):
-		if(playerTower[x] > playerTower[x - 1] and playerTower[x] > max):
-			a.append(playerTower[x - 1])
-			max = playerTower[x - 1]
-	return (len(a) + 1)/USER_TOWER_HEIGHT * 100
-
+def count_order(playerTower, userChoice):
+	count = 0
+	ind = get_index(userChoice, playerTower)
+	for x in range(1, ind + 1):
+		if(playerTower[x - 1] < playerTower[ind]):
+			if(playerTower[x-1] < playerTower[x]):
+				count += 1
+	for y in range(ind + 1, len(playerTower)):
+		if(playerTower[y - 1] > playerTower[ind]):
+			if(playerTower[y -1] < playerTower[y]):
+				count += 1
+	return count/USER_TOWER_HEIGHT * 100
+'''
 def compare_Move(playerTower, vikingTower):
 	x = count_order(playerTower)
 	y = count_order(vikingTower)
@@ -69,7 +73,7 @@ def compare_Move(playerTower, vikingTower):
 		return 0
 	else:
 		return -1
-
+'''
 def main():
 	while True:
 		points = 0
@@ -92,30 +96,31 @@ def main():
 				while(pt.count(user_choice) == 0):
 					user_choice = int(input("Please enter the block you wish to switch "))
 				num = int(discardPile.show_card())
+				rt = count_order(pt,user_choice)
 				discardPile.replace(get_index(user_choice, pt), pt, discardPile)
 				points += score(num, pt)
 				print(display_tower(pt))
-				print("This is your current deck rating: " + str(count_order(pt)) + "%")
+				print("This is your current deck rating: " + str(rt) + "%")
 			elif user_input.lower() == "UNKNOWN".lower():
 				print("The card you can choose is: " + tower.show_card())
 				u_i = input("Please choose YES, or DISCARD(YOUR TURN WILL BE SKIPPED ")
 				while(not u_i.lower() == "YES".lower() and not u_i.lower() == "DISCARD".lower()):
-					user_input = input("Please enter a valid choice(YES or DISCARD) ")
+					u_i = input("Please enter a valid choice(YES or DISCARD) ")
 				if u_i.lower() == "YES".lower():
 					u_c = int(input("Please enter the block you wish to switch "))
 					while(pt.count(u_c) == 0):
 						u_c = int(input("Please enter the block you wish to switch "))
 					num = int(tower.show_card())
+					r_t = count_order(pt,u_c)
 					tower.replace(get_index(u_c, pt), pt, discardPile)
 					points += score(num, pt)
 					print(display_tower(pt))
 
-					print("This is your current deck rating: " + str(count_order(pt)) + "%")
+					print("This is your current deck rating: " + str(r_t) + "%")
 				elif u_i.lower() == "DISCARD".lower():
 					tower.replace_a(discardPile)
 					print(display_tower(pt))
 
-					print("This is your current deck rating: " + str(count_order(pt)) + "%")
 			#Viking
 			step1 = random.random() < 0.5
 			step2 = random.random() < 0.5

@@ -1,6 +1,13 @@
 {
     "configurations": [
         {
+            "type": "java",
+            "name": "CodeLens (Launch) - Driver",
+            "request": "launch",
+            "mainClass": "Driver",
+            "projectName": "src_tower_blaster"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",

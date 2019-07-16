@@ -51,17 +51,13 @@ def score(block, pt):
 	if block in cont:
 				return block * len(cont) * len(cont)
 
-def count_order(playerTower, userChoice):
+def count_order(playerTower):
 	count = 0
-	ind = get_index(userChoice, playerTower)
-	for x in range(1, ind + 1):
-		if(playerTower[x - 1] < playerTower[ind]):
-			if(playerTower[x-1] < playerTower[x]):
-				count += 1
-	for y in range(ind + 1, len(playerTower)):
-		if(playerTower[y - 1] > playerTower[ind]):
-			if(playerTower[y -1] < playerTower[y]):
-				count += 1
+	current_max = playerTower[0]
+	for x in range(1, len(playerTower)):
+		if(playerTower[x - 1] < playerTower[x]):
+			current_max = playerTower[x]
+		
 	return count/USER_TOWER_HEIGHT * 100
 '''
 def compare_Move(playerTower, vikingTower):
@@ -96,7 +92,7 @@ def main():
 				while(pt.count(user_choice) == 0):
 					user_choice = int(input("Please enter the block you wish to switch "))
 				num = int(discardPile.show_card())
-				rt = count_order(pt,user_choice)
+				rt = count_order(pt)
 				discardPile.replace(get_index(user_choice, pt), pt, discardPile)
 				points += score(num, pt)
 				print(display_tower(pt))
@@ -111,7 +107,7 @@ def main():
 					while(pt.count(u_c) == 0):
 						u_c = int(input("Please enter the block you wish to switch "))
 					num = int(tower.show_card())
-					r_t = count_order(pt,u_c)
+					r_t = count_order(pt)
 					tower.replace(get_index(u_c, pt), pt, discardPile)
 					points += score(num, pt)
 					print(display_tower(pt))

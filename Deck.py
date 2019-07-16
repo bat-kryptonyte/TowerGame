@@ -80,6 +80,9 @@ def main():
 		vikings = tower.new_tower(USER_TOWER_HEIGHT)
 		discardPile = Deck(0)
 		tower.replace_a(discardPile)
+		print(display_tower(vikings))
+		print(discardPile.get_tower())
+		print(tower.get_tower())
 		print(display_tower(pt))
 		while not is_win(pt) or not is_win(vikings):
 			#User

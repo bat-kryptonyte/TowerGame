@@ -145,7 +145,7 @@ def main():
     nd = node(pt, rt, discard, deck, True)
     #print(evaluate(nd))
     t = time.time()
-    print(minimax(nd, 9, -inf, inf, evaluate))
+    print(minimax(nd, 8, -inf, inf, evaluate))
     print(time.time() - t)
 
 #print(get_available_moves(rt, discard, deck))

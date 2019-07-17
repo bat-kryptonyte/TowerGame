@@ -1,6 +1,7 @@
 from Player import player
 from numba import jit
 from math import inf
+import time
 class robot1(player):
     def choice(num, tower, ptower, discard_pile, deck):
         pass
@@ -35,7 +36,7 @@ def generate_subnode(n):
         '''Returns [[new_tower, new_discard_pile, new_deck], [], []...]'''
         discard_pile = n.get_discard()
         deck = n.get_deck()
-        if not n.is_robot():
+        if n.is_robot():
             tower = n.get_pt()
             rt = n.get_rt()
             if len(deck) == 0:
@@ -101,19 +102,39 @@ def evaluate(n):
     x = count_order(playerTower)
     y = count_order(vikingTower)
     return y - x
-
-def minimax(current_node, depth, player, evaluate):
+'''
+def minimax(current_node, depth, evaluate):
     if depth == 0:
         return evaluate(current_node)
-    if player:
+    if not current_node.is_robot():
         value = -inf
         for n in generate_subnode(current_node):
-            value = max(value, minimax(n, depth - 1, False, evaluate))
+            value = max(value, minimax(n, depth - 1, evaluate))
         return value
     else:
         value = inf
         for n in generate_subnode(current_node):
-            value = min(value, minimax(n, depth - 1, True, evaluate))
+            value = min(value, minimax(n, depth - 1, evaluate))
+        return value
+'''
+def minimax(current_node, depth, alpha, beta, evaluate):
+    if depth == 0:
+        return evaluate(current_node)
+    if not current_node.is_robot():
+        value = -inf
+        for n in generate_subnode(current_node):
+            value = max(value, minimax(n, depth - 1, alpha, beta, evaluate))
+            alpha = max(alpha, value)
+            if beta <= alpha:
+                break
+        return value
+    else:
+        value = inf
+        for n in generate_subnode(current_node):
+            value = min(value, minimax(n, depth - 1, alpha, beta, evaluate))
+            beta = min(beta, value)
+            if beta <= alpha:
+                break
         return value
 
 def main():
@@ -122,8 +143,10 @@ def main():
     deck = [10, 22, 21, 39, 43, 14, 6, 35, 41, 11, 4, 28, 32, 33, 18, 13, 37, 16, 47, 38, 50, 3, 25, 31, 2, 49, 1, 20, 17]
     pt = [12, 34, 7, 8, 30, 45, 9, 27, 19, 15]
     nd = node(pt, rt, discard, deck, True)
-    print(evaluate(nd))
-    #print(minimax(nd, 3, False, evaluate))
+    #print(evaluate(nd))
+    t = time.time()
+    print(minimax(nd, 9, -inf, inf, evaluate))
+    print(time.time() - t)
 
 #print(get_available_moves(rt, discard, deck))
 '''

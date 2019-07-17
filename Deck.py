@@ -52,13 +52,24 @@ def score(block, pt):
 				return block * len(cont) * len(cont)
 
 def count_order(playerTower):
+	temp = []
 	count = 0
-	current_max = playerTower[0]
-	for x in range(1, len(playerTower)):
-		if(playerTower[x - 1] < playerTower[x]):
-			current_max = playerTower[x]
-		
-	return count/USER_TOWER_HEIGHT * 100
+	max = 0
+	alst = []
+	lst = [playerTower[0]]
+	i = 1
+	for y in range(len(playerTower) - 1):
+		if(playerTower[y] > playerTower[y + 1]):
+			lst.append(playerTower[y])
+			temp = lst
+			alst.append(temp)
+			lst = []
+		else:
+			lst.append(playerTower[y])
+	for x in range(len(alst) - 1):
+		if(len(alst[x]) < len(alst[x + 1])):
+			max = len(alst[x + 1])
+	return (max + 1)/USER_TOWER_HEIGHT * 100
 '''
 def compare_Move(playerTower, vikingTower):
 	x = count_order(playerTower)
@@ -80,9 +91,11 @@ def main():
 		vikings = tower.new_tower(USER_TOWER_HEIGHT)
 		discardPile = Deck(0)
 		tower.replace_a(discardPile)
+		'''
 		print(display_tower(vikings))
 		print(discardPile.get_tower())
 		print(tower.get_tower())
+		'''
 		print(display_tower(pt))
 		while not is_win(pt) or not is_win(vikings):
 			#User

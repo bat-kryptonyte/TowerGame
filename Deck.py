@@ -70,7 +70,7 @@ def count_order(playerTower):
 		if(len(alst[x]) < len(alst[x + 1])):
 			max = len(alst[x + 1])
 	return (max + 1)/USER_TOWER_HEIGHT * 100
-'''
+
 def compare_Move(playerTower, vikingTower):
 	x = count_order(playerTower)
 	y = count_order(vikingTower)
@@ -80,7 +80,7 @@ def compare_Move(playerTower, vikingTower):
 		return 0
 	else:
 		return -1
-'''
+
 def main():
 	while True:
 		points = 0

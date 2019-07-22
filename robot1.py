@@ -31,14 +31,17 @@ class node(object):
     
     def is_robot(self):
         return self.player
+    
+    def __str__(self):
+        return "pt: " + str(self.pt) + "\nrt: " + str(self.rt) + "\ndiscard: " + str(self.lst[0]) + "\ndeck: " + str(self.lst[1])
 
 def generate_subnode(n):
-        '''Returns [[new_tower, new_discard_pile, new_deck], [], []...]'''
-        discard_pile = n.get_discard()
-        deck = n.get_deck()
+        '''Returns [subnode1, subnode2, ...]'''
+        discard_pile = n.get_discard()[:]
+        deck = n.get_deck()[:]
         if n.is_robot():
-            tower = n.get_pt()
-            rt = n.get_rt()
+            tower = n.get_pt()[:]
+            rt = n.get_rt()[:]
             if len(deck) == 0:
                 return []
             result = [node(tower[:], rt, [deck[0]] + discard_pile[:], deck[1:], not n.is_robot())]
@@ -47,8 +50,8 @@ def generate_subnode(n):
                 if len(deck) > 0:
                     result.append(node(tower[0:i] + [deck[0]] + tower[i + 1:], rt, [tower[i]] + discard_pile, deck[1:], not n.is_robot()))
         else:
-            tower = n.get_rt()
-            pt = n.get_pt()
+            tower = n.get_rt()[:]
+            pt = n.get_pt()[:]
             if len(deck) == 0:
                 return []
             result = [node(pt, tower[:], [deck[0]] + discard_pile[:], deck[1:], not n.is_robot())]
@@ -117,11 +120,41 @@ def minimax(current_node, depth, evaluate):
             value = min(value, minimax(n, depth - 1, evaluate))
         return value
 '''
+
+class Value(object):
+
+    def __init__(self, num, n):
+        self.num = num
+        self.n = n
+    
+    def __str__(self):
+        return "Value: " + str(self.num) + "\nNode: " + str(self.n)
+    
+    def __eq__(self, v):
+        return self.num == v.num
+    
+    def __le__(self, v):
+        return self.num <= v.num
+    
+    def __lt__(self, v):
+        return self.num < v.num
+    
+    def __ge__(self, v):
+        return self.num >= v.num
+    
+    def __gt__(self, v):
+        return self.num > v.num
+    
+    def __ne__(self, v):
+        return not self.num == v.num
+
+DEPTH = 5
+
 def minimax(current_node, depth, alpha, beta, evaluate):
     if depth == 0:
-        return evaluate(current_node)
+        return Value(evaluate(current_node), current_node)
     if not current_node.is_robot():
-        value = -inf
+        value = Value(-inf, None)
         for n in generate_subnode(current_node):
             value = max(value, minimax(n, depth - 1, alpha, beta, evaluate))
             alpha = max(alpha, value)
@@ -129,7 +162,7 @@ def minimax(current_node, depth, alpha, beta, evaluate):
                 break
         return value
     else:
-        value = inf
+        value = Value(inf, None)
         for n in generate_subnode(current_node):
             value = min(value, minimax(n, depth - 1, alpha, beta, evaluate))
             beta = min(beta, value)
@@ -138,21 +171,13 @@ def minimax(current_node, depth, alpha, beta, evaluate):
         return value
 
 def main():
-    rt = [20, 29, 30, 36, 44, 23, 42, 40, 26, 48]
+    rt = [1, 5, 3, 10, 15, 17, 29, 28, 25, 40]
     discard = [24]
     deck = [10, 22, 21, 39, 43, 14, 6, 35, 41, 11, 4, 28, 32, 33, 18, 13, 37, 16, 47, 38, 50, 3, 25, 31, 2, 49, 1, 20, 17]
-    pt = [12, 34, 7, 8, 30, 45, 9, 27, 19, 15]
+    pt = [12, 34, 7, 8, 30, 29, 9, 27, 19, 15]
     nd = node(pt, rt, discard, deck, True)
-    #print(evaluate(nd))
     t = time.time()
-    print(minimax(nd, 8, -inf, inf, evaluate))
+    print(minimax(nd, DEPTH, Value(-inf, None), Value(inf, None), evaluate))
     print(time.time() - t)
 
-#print(get_available_moves(rt, discard, deck))
-'''
-generate_tree(pt, rt, discard, deck, 4, True, None)
-print("finish generating")
-#t = RenderTree(tree[0])
-print(len(tree))
-'''
 main()
